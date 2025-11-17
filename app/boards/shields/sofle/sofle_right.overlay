@@ -10,6 +10,11 @@
     col-offset = <6>;
 };
 
+/ {
+    chosen {
+        zmk,kscan = &side_band_behavior_triggers;
+ 	};
+};
 &kscan0 {
     col-gpios
         = <&pro_micro 10 GPIO_ACTIVE_HIGH>
@@ -19,6 +24,20 @@
         , <&pro_micro 18 GPIO_ACTIVE_HIGH>
         , <&pro_micro 19 GPIO_ACTIVE_HIGH>
         ;
+};
+
+/{
+	side_band_behavior_triggers: side_band_behavior_triggers {
+		compatible = "zmk,kscan-sideband-behaviors";
+		wakeup-source;
+		kscan = <&kscan0>;
+		soft_off {
+			column = <5>;
+			row = <0>;
+			bindings = <&hw_soft_off>;
+		};
+	};
+
 };
 
 &right_encoder {
